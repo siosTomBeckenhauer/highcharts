@@ -4,7 +4,7 @@ env:
 globals:
     $: true
     ADBE: true
-    allObjectProperties: true
+    allPropertyTypes: true
     GOOGL: true
     Highcharts: true
     hs: true                    # Highslide

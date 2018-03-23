@@ -439,7 +439,7 @@ function lolexRunAndUninstall(clock) { // eslint-disable-line no-unused-vars
  * @param  {Object} obj  The object with properties.
  * @return {Object} A dictionary with property names and type strings.
  */
-function allObjectProperties(obj) { // eslint-disable-line no-unused-vars
+function allPropertyTypes(obj) { // eslint-disable-line no-unused-vars
 
     var resultDictionary = {};
 
@@ -449,21 +449,11 @@ function allObjectProperties(obj) { // eslint-disable-line no-unused-vars
         resultDictionary.null = 'null';
     } else {
         Object
-            .keys(obj)
-            .sort((a, b) => {
-                if (a === b) {
-                    return 0;
-                }
-                return (a < b ? -1 : 1);
-            })
+            .getOwnPropertyNames(obj)
+            .sort((a, b) => (a < b ? -1 : 1))
             .forEach(propertyName => {
-                if (!obj.hasOwnProperty(propertyName)) {
-                    return;
-                }
                 if (obj[propertyName] === null) {
                     resultDictionary[propertyName] = 'null';
-                } else if (obj[propertyName] instanceof Array) {
-                    resultDictionary[propertyName] = 'Array';
                 } else if (obj[propertyName] instanceof Highcharts.Axis) {
                     resultDictionary[propertyName] = 'Highcharts.Axis';
                 } else if (obj[propertyName] instanceof Highcharts.Chart) {
@@ -482,6 +472,40 @@ function allObjectProperties(obj) { // eslint-disable-line no-unused-vars
                     resultDictionary[propertyName] = 'Highcharts.SVGRenderer';
                 } else if (obj[propertyName] instanceof Highcharts.Time) {
                     resultDictionary[propertyName] = 'Highcharts.Time';
+                } else if (obj[propertyName] instanceof window.HTMLDocument) {
+                    resultDictionary[propertyName] = 'window.HTMLDocument';
+                } else if (obj[propertyName] instanceof window.Document) {
+                    resultDictionary[propertyName] = 'window.Document';
+                } else if (obj[propertyName] instanceof window.HTMLElement) {
+                    resultDictionary[propertyName] = 'window.HTMLElement';
+                } else if (obj[propertyName] instanceof window.SVGElement) {
+                    resultDictionary[propertyName] = 'window.SVGElement';
+                } else if (obj[propertyName] instanceof window.Element) {
+                    resultDictionary[propertyName] = 'window.Element';
+                } else if (obj[propertyName] instanceof window.CustomEvent) {
+                    resultDictionary[propertyName] = 'window.CustomEvent';
+                } else if (obj[propertyName] instanceof window.MouseEvent) {
+                    resultDictionary[propertyName] = 'window.MouseEvent';
+                } else if (obj[propertyName] instanceof window.Event) {
+                    resultDictionary[propertyName] = 'window.Event';
+                } else if (obj[propertyName] instanceof window.File) {
+                    resultDictionary[propertyName] = 'window.File';
+                } else if (obj[propertyName] instanceof window.Form) {
+                    resultDictionary[propertyName] = 'window.Form';
+                } else if (obj[propertyName] instanceof window.Promise) {
+                    resultDictionary[propertyName] = 'window.Promise';
+                } else if (obj[propertyName] instanceof window.Screen) {
+                    resultDictionary[propertyName] = 'window.Screen';
+                } else if (obj[propertyName] instanceof window.Window) {
+                    resultDictionary[propertyName] = 'window.Window';
+                } else if (obj[propertyName] instanceof Array) {
+                    resultDictionary[propertyName] = 'Array';
+                } else if (obj[propertyName] instanceof Date) {
+                    resultDictionary[propertyName] = 'Date';
+                } else if (obj[propertyName] instanceof Error) {
+                    resultDictionary[propertyName] = 'Error';
+                } else if (obj[propertyName] instanceof RegExp) {
+                    resultDictionary[propertyName] = 'RegExp';
                 } else {
                     resultDictionary[propertyName] = typeof obj[propertyName];
                 }
