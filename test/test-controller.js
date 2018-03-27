@@ -450,7 +450,7 @@ function allPropertyTypes(obj) { // eslint-disable-line no-unused-vars
     } else {
         Object
             .getOwnPropertyNames(obj)
-            .sort((a, b) => (a < b ? -1 : 1))
+            .sort()
             .forEach(propertyName => {
                 if (obj[propertyName] === null) {
                     resultDictionary[propertyName] = 'null';
